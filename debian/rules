@@ -6,6 +6,11 @@ include /usr/share/openstack-pkg-tools/pkgos.make
 %:
 	dh $@ --buildsystem=python_distutils --with python2
 
+override_dh_auto_install:
+	dh_auto_install -O--buildsystem=python_distutils
+	rm -rf $(CURDIR)/debian/python-pycadf/usr/etc
+	install -D -m 0664 etc/pycadf/api_audit_map.conf $(CURDIR)/debian/python-pycadf/etc/pycadf/api_audit_map.conf
+
 ifeq (,$(findstring nocheck, $(DEB_BUILD_OPTIONS)))
 override_dh_auto_test:
 	python setup.py testr --slowest
