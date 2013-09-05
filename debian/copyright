@@ -1,5 +1,6 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: pycadf
+Upstream-Contact: OpenStack Project Creator <openstack-infra@lists.openstack.org>
 Source: git://github.com/stackforge/pycadf.git
 
 Files: debian/*
@@ -7,7 +8,15 @@ Copyright: (c) 2013, Thomas Goirand <zigo@debian.org>
 License: Apache-2
 
 Files: *
-Copyright: (c) 2013, OpenStack
+Copyright: (c) 2013, OpenStack foundation
+           (c) 2013, IBM corp.
+           (c) 2013, Dreamhost
+           (c) 2011-2013, USA gov & NASA
+           (c) 2013, OpenStack LLC
+           (c) 2012, SINA corp.
+           (c) 2013, Gordon Chung <chungg@ca.ibm.com>
+           (c) 2013, Matt Riedemann <mriedem@us.ibm.com>
+           (c) 2013, Doug Hellmann <doug.hellmann@dreamhost.com>
 License: Apache-2
 
 License: Apache-2
