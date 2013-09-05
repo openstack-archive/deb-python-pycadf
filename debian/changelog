@@ -1,0 +1,5 @@
+python-pycadf (0.1.5-1) unstable; urgency=low
+
+  * Initial release. (Closes: #XXXXXX)
+
+ -- Thomas Goirand <zigo@debian.org>  Thu, 05 Sep 2013 00:29:51 +0800

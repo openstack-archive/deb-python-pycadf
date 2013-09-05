@@ -1,0 +1,48 @@
+Source: python-pycadf
+Section: python
+Priority: optional
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Uploaders: Julien Danjou <acid@debian.org>,
+           Thomas Goirand <zigo@debian.org>,
+           Mehdi Abaakouk <sileht@sileht.net>
+Build-Depends: debhelper (>= 9),
+               openstack-pkg-tools,
+               python-all (>= 2.6.6-3~),
+               python-setuptools
+Build-Depends-Indep: python-babel,
+                     python-coverage,
+                     python-fixtures,
+                     python-iso8601,
+                     python-netaddr,
+                     python-oslo.config,
+                     python-oslo.sphinx,
+                     python-six,
+                     python-subunit,
+                     python-testscenarios (>= 0.4),
+                     python-testtools,
+                     python-tz,
+                     python-webob (>= 1.2.3),
+                     testrepository (>=0.0.17)
+Standards-Version: 3.9.4
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=openstack/python-pycadf.git
+Vcs-Git: git://anonscm.debian.org/openstack/python-pycadf.git
+Homepage: https://launchpad.net/pycadf
+
+Package: python-pycadf
+Architecture: all
+Pre-Depends: dpkg (>= 1.15.6~)
+Depends: python-babel,
+         python-iso8601,
+         python-netaddr,
+         python-oslo.config,
+         python-six,
+         python-tz,
+         ${misc:Depends},
+         ${python:Depends}
+Recommends: ${python:Recommends}
+Description: implementation of DMTF Cloud Audit (CADF) data model
+ pyCADF is an implementation of DMTF Cloud Audit (CADF) data model.
+ DMTF Cloud Management Initiative is promoting the work of the Cloud Management
+ Work Group, the Cloud Auditing Data Federation Working Group, the System
+ Virtualization, Partitioning, Clustering Working Group and the Software
+ Entitlement Working Group. See http://dmtf.org for details.
