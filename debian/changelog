@@ -1,5 +1,6 @@
-python-pycadf (0.1.5-2) UNRELEASED; urgency=low
+python-pycadf (0.2-1) unstable; urgency=low
 
+  * New upstream release.
   * Added --testr-args='--subunit  ' when calling testr
 
  -- Thomas Goirand <zigo@debian.org>  Tue, 01 Oct 2013 15:03:34 +0800
