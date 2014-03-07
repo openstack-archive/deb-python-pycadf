@@ -27,7 +27,7 @@ Build-Depends-Indep: python-babel,
 Standards-Version: 3.9.4
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=openstack/python-pycadf.git
 Vcs-Git: git://anonscm.debian.org/openstack/python-pycadf.git
-Homepage: https://launchpad.net/pycadf
+Homepage: https://github.com/openstack/pycadf
 
 Package: python-pycadf
 Architecture: all

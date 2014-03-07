@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: pycadf
 Upstream-Contact: OpenStack Project Creator <openstack-infra@lists.openstack.org>
-Source: git://github.com/stackforge/pycadf.git
+Source: git://github.com/openstack/pycadf.git
 
 Files: debian/*
 Copyright: (c) 2013, Thomas Goirand <zigo@debian.org>
