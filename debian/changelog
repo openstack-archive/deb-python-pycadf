@@ -3,6 +3,7 @@ python-pycadf (0.4.1-1) unstable; urgency=medium
   * New upstream release.
   * Updated URLs of the project in debian/rules, debian/copyright and
     debian/control.
+  * Review of (build-)dependencies.
 
  -- Thomas Goirand <zigo@debian.org>  Fri, 07 Mar 2014 15:10:28 +0800
 
