@@ -16,27 +16,35 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import six
 import uuid
 
-from pycadf import cadftype
-from pycadf import timestamp
+from oslo.config import cfg
+
+CONF = cfg.CONF
+opts = [
+    cfg.StrOpt('namespace',
+               default='openstack',
+               help='namespace prefix for generated id'),
+]
+CONF.register_opts(opts, group='audit')
 
 
-# TODO(mrutkows): Add openstack namespace prefix (e.g. 'openstack:') to all
-# cadf:Identifiers
 # TODO(mrutkows): make the namespace prefix configurable and have it resolve to
 # a full openstack namespace/domain value via some declaration (e.g.
 # "openstack:" == "http:\\www.openstack.org\")...
 def generate_uuid():
-    uuid_temp = uuid.uuid5(uuid.NAMESPACE_DNS,
-                           cadftype.CADF_VERSION_1_0_0
-                           + timestamp.get_utc_now())
-    return str(uuid_temp)
+    return norm_ns(str(uuid.uuid4()))
+
+
+def norm_ns(str_id):
+    prefix = CONF.audit.namespace + ':' if CONF.audit.namespace else ''
+    return prefix + str_id
 
 
 # TODO(mrutkows): validate any cadf:Identifier (type) record against
 # CADF schema.  This would include schema validation as an optional parm.
 def is_valid(value):
-    if not isinstance(value, basestring):
+    if not isinstance(value, six.string_types):
         raise TypeError
     return True

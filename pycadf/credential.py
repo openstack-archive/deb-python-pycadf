@@ -14,7 +14,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import six
+
 from pycadf import cadftype
+from pycadf import utils
 
 TYPE_URI_CRED = cadftype.CADF_VERSION_1_0_0 + 'credential'
 
@@ -29,15 +32,15 @@ class Credential(cadftype.CADFAbstractType):
 
     type = cadftype.ValidatorDescriptor(
         CRED_KEYNAME_TYPE,
-        lambda x: isinstance(x, basestring))
+        lambda x: isinstance(x, six.string_types))
     token = cadftype.ValidatorDescriptor(
         CRED_KEYNAME_TOKEN,
-        lambda x: isinstance(x, basestring))
+        lambda x: isinstance(x, six.string_types))
 
     def __init__(self, token, type=None):
 
         # Credential.token
-        setattr(self, CRED_KEYNAME_TOKEN, token)
+        setattr(self, CRED_KEYNAME_TOKEN, utils.mask_value(token))
 
         # Credential.type
         if type is not None:
@@ -46,4 +49,4 @@ class Credential(cadftype.CADFAbstractType):
     # TODO(mrutkows): validate this cadf:Credential type against schema
     def is_valid(self):
         # TODO(mrutkows): validate specific attribute type/format
-        return hasattr(self, CRED_KEYNAME_TOKEN)
+        return self._isset(CRED_KEYNAME_TOKEN)

@@ -1,22 +1,16 @@
-# Install bounded pep8/pyflakes first, then let flake8 install
-pep8==1.4.5
-pyflakes==0.7.2
-flake8==2.0
-hacking>=0.5.6,<0.8
+# Hacking already pins down pep8, pyflakes and flake8
+hacking>=0.8.0,<0.9
 
+coverage>=3.6
 discover
 fixtures>=0.3.14
-python-subunit
+mock>=1.0
+mox>=0.5.3
+python-subunit>=0.0.18
 testrepository>=0.0.17
-testscenarios>=0.4,<0.5
-testtools>=0.9.32
-WebOb>=1.2.3,<1.3
-
-# when we can require tox>= 1.4, this can go into tox.ini:
-#  [testenv:cover]
-#  deps = {[testenv]deps} coverage
-coverage>=3.6
+testscenarios>=0.4
+testtools>=0.9.34
 
 # this is required for the docs build jobs
-sphinx>=1.1.2
-oslo.sphinx
+sphinx>=1.1.2,<1.2
+oslosphinx

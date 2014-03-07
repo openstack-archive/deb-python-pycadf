@@ -28,7 +28,7 @@ ACTION_READ = 'read'
 ACTION_UPDATE = 'update'
 ACTION_DELETE = 'delete'
 # OpenStack specific, Profile or change CADF spec. to add this action
-ACTION_LIST = 'list'
+ACTION_LIST = 'read/list'
 
 # TODO(mrutkows): Make global using WSGI mechanism
 ACTION_TAXONOMY = frozenset([
@@ -64,7 +64,10 @@ ACTION_TAXONOMY = frozenset([
 
 # TODO(mrutkows): validate absolute URIs as well
 def is_valid_action(value):
-    return value in ACTION_TAXONOMY
+    for type in ACTION_TAXONOMY:
+        if value.startswith(type):
+            return True
+    return False
 
 
 TYPE_URI_OUTCOME = cadftype.CADF_VERSION_1_0_0 + 'outcome'
@@ -87,6 +90,7 @@ OUTCOME_TAXONOMY = frozenset([
 def is_valid_outcome(value):
     return value in OUTCOME_TAXONOMY
 
+SERVICE_SECURITY = 'service/security'
 ACCOUNT_USER = 'service/security/account/user'
 CADF_AUDIT_FILTER = 'service/security/audit/filter'
 
@@ -119,7 +123,7 @@ RESOURCE_TAXONOMY = frozenset([
     'service/composition',
     'service/compute',
     'service/database',
-    'service/security',
+    SERVICE_SECURITY,
     'service/security/account',
     ACCOUNT_USER,
     CADF_AUDIT_FILTER,
@@ -176,4 +180,7 @@ RESOURCE_TAXONOMY = frozenset([
 
 # TODO(mrutkows): validate absolute URIs as well
 def is_valid_resource(value):
-    return value in RESOURCE_TAXONOMY
+    for type in RESOURCE_TAXONOMY:
+        if value.startswith(type):
+            return True
+    return False

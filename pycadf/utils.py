@@ -2,8 +2,6 @@
 #
 # Copyright 2013 IBM Corp.
 #
-# Author: Matt Rutkowski <mrutkows@us.ibm.com>
-#
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
 # a copy of the License at
@@ -15,22 +13,17 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-
 import six
 
 
-def generate_name_value_tag(name, value):
-    # TODO(mrutkows): detailed test/concatenation of independent values
-    # into a URI
-    if name is None or value is None:
-        raise ValueError('Invalid name and/or value. Values cannot be None')
+def mask_value(value, s_percent=0.125):
+    """Obfuscate a given string to show only a percentage of leading
+    and trailing characters.
 
-    tag = name + "?value=" + value
-    return tag
-
-
-# TODO(mrutkows): validate any Tag's name?value= format
-def is_valid(value):
-    if not isinstance(value, six.string_types):
-        raise TypeError
-    return True
+    :param s_percent: The percentage of characters to replace
+    """
+    if isinstance(value, six.string_types):
+        visible = (32 if int(round(len(value) * s_percent)) > 32
+                   else int(round(len(value) * s_percent)))
+        return value[:visible] + " xxxxxxxx " + value[-visible:]
+    return value

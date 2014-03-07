@@ -17,6 +17,7 @@
 # under the License.
 
 import abc
+import six
 
 from pycadf.openstack.common import jsonutils
 
@@ -73,9 +74,8 @@ class ValidatorDescriptor(object):
             raise ValueError('%s must not be None.' % self.name)
 
 
-class CADFAbstractType(object):
+class CADFAbstractType(six.with_metaclass(abc.ABCMeta, object)):
     """The abstract base class for all CADF (complex) data types (classes)."""
-    __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
     def is_valid(self, value):
@@ -84,6 +84,15 @@ class CADFAbstractType(object):
     def as_dict(self):
         """Return dict representation of Event."""
         return jsonutils.to_primitive(self, convert_instances=True)
+
+    def _isset(self, attr):
+        """Check to see if attribute is defined."""
+        try:
+            if isinstance(getattr(self, attr), ValidatorDescriptor):
+                return False
+            return True
+        except AttributeError:
+            return False
 
     # TODO(mrutkows): Eventually, we want to use the OrderedDict (introduced
     # in Python 2.7) type for all CADF classes to store attributes in a

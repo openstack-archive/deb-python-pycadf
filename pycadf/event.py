@@ -16,6 +16,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import six
+
 from pycadf import attachment
 from pycadf import cadftaxonomy
 from pycadf import cadftype
@@ -46,6 +48,7 @@ EVENT_KEYNAME_MEASUREMENTS = "measurements"
 EVENT_KEYNAME_TAGS = "tags"
 EVENT_KEYNAME_ATTACHMENTS = "attachments"
 EVENT_KEYNAME_OBSERVER = "observer"
+EVENT_KEYNAME_OBSERVERID = "observerId"
 EVENT_KEYNAME_REPORTERCHAIN = "reporterchain"
 
 EVENT_KEYNAMES = [EVENT_KEYNAME_TYPEURI,
@@ -64,6 +67,7 @@ EVENT_KEYNAMES = [EVENT_KEYNAME_TYPEURI,
                   EVENT_KEYNAME_TAGS,
                   EVENT_KEYNAME_ATTACHMENTS,
                   EVENT_KEYNAME_OBSERVER,
+                  EVENT_KEYNAME_OBSERVERID,
                   EVENT_KEYNAME_REPORTERCHAIN]
 
 
@@ -77,15 +81,16 @@ class Event(cadftype.CADFAbstractType):
                                              lambda x: timestamp.is_valid(x))
     initiator = cadftype.ValidatorDescriptor(
         EVENT_KEYNAME_INITIATOR,
-        (lambda x: isinstance(x, resource.Resource) and
-         x.is_valid()))
+        (lambda x: isinstance(x, resource.Resource) and x.is_valid()
+         and x.id != 'initiator'))
     initiatorId = cadftype.ValidatorDescriptor(
         EVENT_KEYNAME_INITIATORID, lambda x: identifier.is_valid(x))
     action = cadftype.ValidatorDescriptor(
         EVENT_KEYNAME_ACTION, lambda x: cadftaxonomy.is_valid_action(x))
     target = cadftype.ValidatorDescriptor(
-        EVENT_KEYNAME_TARGET, (lambda x: isinstance(x, resource.Resource) and
-                               x.is_valid()))
+        EVENT_KEYNAME_TARGET,
+        (lambda x: isinstance(x, resource.Resource) and x.is_valid()
+         and x.id != 'target'))
     targetId = cadftype.ValidatorDescriptor(
         EVENT_KEYNAME_TARGETID, lambda x: identifier.is_valid(x))
     outcome = cadftype.ValidatorDescriptor(
@@ -94,19 +99,19 @@ class Event(cadftype.CADFAbstractType):
         EVENT_KEYNAME_REASON,
         lambda x: isinstance(x, reason.Reason) and x.is_valid())
     severity = cadftype.ValidatorDescriptor(EVENT_KEYNAME_SEVERITY,
-                                            lambda x: isinstance(x,
-                                                                 basestring))
+                                            lambda x: isinstance(
+                                                x, six.string_types))
     observer = cadftype.ValidatorDescriptor(
         EVENT_KEYNAME_OBSERVER,
-        (lambda x: isinstance(x, resource.Resource) or
-         (isinstance(x, basestring) and
-          (x == 'initiator' or x == 'target'))))
+        (lambda x: isinstance(x, resource.Resource) and x.is_valid()))
+    observerId = cadftype.ValidatorDescriptor(
+        EVENT_KEYNAME_OBSERVERID, lambda x: identifier.is_valid(x))
 
     def __init__(self, eventType=cadftype.EVENTTYPE_ACTIVITY,
                  id=None, eventTime=None,
                  action=cadftaxonomy.UNKNOWN, outcome=cadftaxonomy.UNKNOWN,
                  initiator=None, initiatorId=None, target=None, targetId=None,
-                 severity=None, reason=None, observer=None):
+                 severity=None, reason=None, observer=None, observerId=None):
 
         # Establish typeURI for the CADF Event data type
         # TODO(mrutkows): support extended typeURIs for Event subtypes
@@ -128,13 +133,16 @@ class Event(cadftype.CADFAbstractType):
         # Event.outcome (Mandatory)
         setattr(self, EVENT_KEYNAME_OUTCOME, outcome)
 
-        # Event.observer (Mandatory)
-        setattr(self, EVENT_KEYNAME_OBSERVER, observer)
+        # Event.observer (Mandatory if no observerId)
+        if observer is not None:
+            setattr(self, EVENT_KEYNAME_OBSERVER, observer)
+        # Event.observerId (Dependent)
+        if observerId is not None:
+            setattr(self, EVENT_KEYNAME_OBSERVERID, observerId)
 
         # Event.initiator (Mandatory if no initiatorId)
         if initiator is not None:
             setattr(self, EVENT_KEYNAME_INITIATOR, initiator)
-
         # Event.initiatorId (Dependent)
         if initiatorId is not None:
             setattr(self, EVENT_KEYNAME_INITIATORID, initiatorId)
@@ -142,7 +150,6 @@ class Event(cadftype.CADFAbstractType):
         # Event.target (Mandatory if no targetId)
         if target is not None:
             setattr(self, EVENT_KEYNAME_TARGET, target)
-
         # Event.targetId (Dependent)
         if targetId is not None:
             setattr(self, EVENT_KEYNAME_TARGETID, targetId)
@@ -223,15 +230,17 @@ class Event(cadftype.CADFAbstractType):
         # TODO(mrutkows): Eventually, make sure all attributes are
         # from either the CADF spec. (or profiles thereof)
         # TODO(mrutkows): validate all child attributes that are CADF types
-        # TODO(mrutkows): Cannot have both an initiator and initiatorId
-        # TODO(mrutkows): Cannot have both an target and targetId
         return (
-            hasattr(self, EVENT_KEYNAME_TYPEURI) and
-            hasattr(self, EVENT_KEYNAME_EVENTTYPE) and
-            hasattr(self, EVENT_KEYNAME_ID) and
-            hasattr(self, EVENT_KEYNAME_EVENTTIME) and
-            hasattr(self, EVENT_KEYNAME_ACTION) and
-            hasattr(self, EVENT_KEYNAME_OUTCOME) and
-            hasattr(self, EVENT_KEYNAME_INITIATOR) and
-            hasattr(self, EVENT_KEYNAME_TARGET)
+            self._isset(EVENT_KEYNAME_TYPEURI) and
+            self._isset(EVENT_KEYNAME_EVENTTYPE) and
+            self._isset(EVENT_KEYNAME_ID) and
+            self._isset(EVENT_KEYNAME_EVENTTIME) and
+            self._isset(EVENT_KEYNAME_ACTION) and
+            self._isset(EVENT_KEYNAME_OUTCOME) and
+            (self._isset(EVENT_KEYNAME_INITIATOR) ^
+             self._isset(EVENT_KEYNAME_INITIATORID)) and
+            (self._isset(EVENT_KEYNAME_TARGET) ^
+             self._isset(EVENT_KEYNAME_TARGETID)) and
+            (self._isset(EVENT_KEYNAME_OBSERVER) ^
+             self._isset(EVENT_KEYNAME_OBSERVERID))
         )

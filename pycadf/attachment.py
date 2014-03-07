@@ -16,6 +16,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import six
+
 from pycadf import cadftype
 
 ATTACHMENT_KEYNAME_TYPEURI = "typeURI"
@@ -33,12 +35,12 @@ class Attachment(cadftype.CADFAbstractType):
     # the set of approved attachment types in order to
     # limit and validate them.
     typeURI = cadftype.ValidatorDescriptor(ATTACHMENT_KEYNAME_TYPEURI,
-                                           lambda x: isinstance(x,
-                                                                basestring))
+                                           lambda x: isinstance(
+                                               x, six.string_types))
     content = cadftype.ValidatorDescriptor(ATTACHMENT_KEYNAME_CONTENT)
     name = cadftype.ValidatorDescriptor(ATTACHMENT_KEYNAME_NAME,
                                         lambda x: isinstance(x,
-                                                             basestring))
+                                                             six.string_types))
 
     def __init__(self, typeURI=None, content=None, name=None):
         # Attachment.typeURI
@@ -57,7 +59,7 @@ class Attachment(cadftype.CADFAbstractType):
     def is_valid(self):
         # Existence test, All attributes must exist for valid Attachment type
         return (
-            hasattr(self, ATTACHMENT_KEYNAME_TYPEURI) and
-            hasattr(self, ATTACHMENT_KEYNAME_NAME) and
-            hasattr(self, ATTACHMENT_KEYNAME_CONTENT)
+            self._isset(ATTACHMENT_KEYNAME_TYPEURI) and
+            self._isset(ATTACHMENT_KEYNAME_NAME) and
+            self._isset(ATTACHMENT_KEYNAME_CONTENT)
         )

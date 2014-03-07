@@ -16,6 +16,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import six
+
 from pycadf import cadftype
 from pycadf import identifier
 
@@ -52,26 +54,26 @@ class Geolocation(cadftype.CADFAbstractType):
     # TODO(mrutkows): we may want to do more validation to make
     # sure numeric range represented by string is valid
     latitude = cadftype.ValidatorDescriptor(GEO_KEYNAME_LATITUDE,
-                                            lambda x: isinstance(x,
-                                                                 basestring))
+                                            lambda x: isinstance(
+                                                x, six.string_types))
     longitude = cadftype.ValidatorDescriptor(GEO_KEYNAME_LONGITUDE,
-                                             lambda x: isinstance(x,
-                                                                  basestring))
+                                             lambda x: isinstance(
+                                                 x, six.string_types))
     elevation = cadftype.ValidatorDescriptor(GEO_KEYNAME_ELEVATION,
-                                             lambda x: isinstance(x,
-                                                                  basestring))
+                                             lambda x: isinstance(
+                                                 x, six.string_types))
     accuracy = cadftype.ValidatorDescriptor(GEO_KEYNAME_ACCURACY,
-                                            lambda x: isinstance(x,
-                                                                 basestring))
+                                            lambda x: isinstance(
+                                                x, six.string_types))
     city = cadftype.ValidatorDescriptor(GEO_KEYNAME_CITY,
-                                        lambda x: isinstance(x,
-                                                             basestring))
+                                        lambda x: isinstance(
+                                            x, six.string_types))
     state = cadftype.ValidatorDescriptor(GEO_KEYNAME_STATE,
-                                         lambda x: isinstance(x,
-                                                              basestring))
+                                         lambda x: isinstance(
+                                             x, six.string_types))
     regionICANN = cadftype.ValidatorDescriptor(
         GEO_KEYNAME_REGIONICANN,
-        lambda x: isinstance(x, basestring))
+        lambda x: isinstance(x, six.string_types))
 
     def __init__(self, id=None, latitude=None, longitude=None,
                  elevation=None, accuracy=None, city=None, state=None,
@@ -118,8 +120,4 @@ class Geolocation(cadftype.CADFAbstractType):
 
     # self validate cadf:Geolocation type
     def is_valid(self):
-        # TODO(mrutkows): validate specific attribute type/format
-        for attr in GEO_KEYNAMES:
-            if not hasattr(self, attr):
-                return False
         return True
