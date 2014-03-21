@@ -1,4 +1,4 @@
-python-pycadf (0.4.1-1) unstable; urgency=medium
+python-pycadf (0.4.1-1) experimental; urgency=medium
 
   * New upstream release.
   * Updated URLs of the project in debian/rules, debian/copyright and
