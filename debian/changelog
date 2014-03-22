@@ -1,3 +1,9 @@
+python-pycadf (0.4.1-2) experimental; urgency=low
+
+  * Missing build-depends: subunit.
+
+ -- Thomas Goirand <zigo@debian.org>  Sat, 22 Mar 2014 15:46:50 +0800
+
 python-pycadf (0.4.1-1) experimental; urgency=medium
 
   * New upstream release.
