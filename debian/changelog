@@ -1,10 +1,14 @@
 python-pycadf (0.5-1) experimental; urgency=medium
 
+  [ gustavo panizzo ]
   * New upstream release.
   * New build dependencies python-sphinx, python-docutils.
   * Increased the version required of python-six, python-iso8601.
 
- -- gustavo panizzo <gfa@zumbi.com.ar>  Wed, 02 Apr 2014 15:57:33 -0300
+  [ Thomas Goirand ]
+  * Some more (buid-)depends fixes.
+
+ -- Thomas Goirand <zigo@debian.org>  Thu, 03 Apr 2014 08:21:58 +0000
 
 python-pycadf (0.4.1-2) experimental; urgency=low
 
