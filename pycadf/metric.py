@@ -1,20 +1,16 @@
-# -*- encoding: utf-8 -*-
-#
 # Copyright 2013 IBM Corp.
 #
-# Author: Matt Rutkowski <mrutkows@us.ibm.com>
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
 #
-# Licensed under the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License. You may obtain
-# a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations
-# under the License.
+# License for the specific language governing permissions and limitations under
+# the License.
 
 import six
 
@@ -28,12 +24,12 @@ TYPE_URI_METRIC = cadftype.CADF_VERSION_1_0_0 + 'metric'
 METRIC_KEYNAME_METRICID = "metricId"
 METRIC_KEYNAME_UNIT = "unit"
 METRIC_KEYNAME_NAME = "name"
-#METRIC_KEYNAME_ANNOTATIONS = "annotations"
+# METRIC_KEYNAME_ANNOTATIONS = "annotations"
 
 METRIC_KEYNAMES = [METRIC_KEYNAME_METRICID,
                    METRIC_KEYNAME_UNIT,
                    METRIC_KEYNAME_NAME
-                   #METRIC_KEYNAME_ANNOTATIONS
+                   # METRIC_KEYNAME_ANNOTATIONS
                    ]
 
 

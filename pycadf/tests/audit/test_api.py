@@ -1,19 +1,17 @@
-# -*- encoding: utf-8 -*-
-#
 # Copyright 2013 IBM Corp.
 #
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
 #
-# Licensed under the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License. You may obtain
-# a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations
-# under the License.
+# License for the specific language governing permissions and limitations under
+# the License.
+
 import uuid
 
 from oslo.config import cfg
@@ -45,7 +43,7 @@ class TestAuditApi(base.TestCase):
     def setUp(self):
         super(TestAuditApi, self).setUp()
         self.audit_api = api.OpenStackAuditApi(
-            'etc/pycadf/api_audit_map.conf')
+            'etc/pycadf/nova_api_audit_map.conf')
 
     def api_request(self, method, url):
         self.ENV_HEADERS['REQUEST_METHOD'] = method
@@ -58,7 +56,7 @@ class TestAuditApi(base.TestCase):
     def test_get_list_with_cfg(self):
         cfg.CONF.set_override(
             'api_audit_map',
-            self.path_get('etc/pycadf/api_audit_map.conf'),
+            self.path_get('etc/pycadf/nova_api_audit_map.conf'),
             group='audit')
         self.audit_api = api.OpenStackAuditApi()
         req = self.api_request('GET',

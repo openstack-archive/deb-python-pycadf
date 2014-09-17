@@ -1,17 +1,16 @@
-#    Copyright (c) 2014 OpenStack Foundation
-#    All Rights Reserved.
+# Copyright (c) 2014 OpenStack Foundation
 #
-#    Licensed under the Apache License, Version 2.0 (the "License"); you may
-#    not use this file except in compliance with the License. You may obtain
-#    a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
 #
-#         http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
-#    Unless required by applicable law or agreed to in writing, software
-#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-#    License for the specific language governing permissions and limitations
-#    under the License.
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
 
 import mock
 import webob
@@ -58,13 +57,13 @@ class AuditMiddlewareTest(base.TestCase):
 
     def setUp(self):
         super(AuditMiddlewareTest, self).setUp()
-        self.map_file = 'etc/pycadf/api_audit_map.conf'
+        self.map_file = 'etc/pycadf/nova_api_audit_map.conf'
 
     def test_api_request(self):
-        middleware = audit.AuditMiddleware(FakeApp(),
-                                           audit_map_file=
-                                           'etc/pycadf/api_audit_map.conf',
-                                           service_name='pycadf')
+        middleware = audit.AuditMiddleware(
+            FakeApp(),
+            audit_map_file='etc/pycadf/nova_api_audit_map.conf',
+            service_name='pycadf')
         self.ENV_HEADERS['REQUEST_METHOD'] = 'GET'
         req = webob.Request.blank('/foo/bar',
                                   environ=self.ENV_HEADERS)
@@ -95,10 +94,10 @@ class AuditMiddlewareTest(base.TestCase):
             self.assertEqual(request['CADF_EVENT']['outcome'], 'success')
 
     def test_api_request_failure(self):
-        middleware = audit.AuditMiddleware(FakeFailingApp(),
-                                           audit_map_file=
-                                           'etc/pycadf/api_audit_map.conf',
-                                           service_name='pycadf')
+        middleware = audit.AuditMiddleware(
+            FakeFailingApp(),
+            audit_map_file='etc/pycadf/nova_api_audit_map.conf',
+            service_name='pycadf')
         self.ENV_HEADERS['REQUEST_METHOD'] = 'GET'
         req = webob.Request.blank('/foo/bar',
                                   environ=self.ENV_HEADERS)
@@ -137,10 +136,10 @@ class AuditMiddlewareTest(base.TestCase):
             raise Exception('error')
         self.stubs.Set(cadf_api.OpenStackAuditApi, 'append_audit_event',
                        func_error)
-        middleware = audit.AuditMiddleware(FakeApp(),
-                                           audit_map_file=
-                                           'etc/pycadf/api_audit_map.conf',
-                                           service_name='pycadf')
+        middleware = audit.AuditMiddleware(
+            FakeApp(),
+            audit_map_file='etc/pycadf/nova_api_audit_map.conf',
+            service_name='pycadf')
         req = webob.Request.blank('/foo/bar',
                                   environ={'REQUEST_METHOD': 'GET'})
         middleware.process_request(req)
@@ -150,10 +149,10 @@ class AuditMiddlewareTest(base.TestCase):
             raise Exception('error')
         self.stubs.Set(cadf_api.OpenStackAuditApi, 'mod_audit_event',
                        func_error)
-        middleware = audit.AuditMiddleware(FakeApp(),
-                                           audit_map_file=
-                                           'etc/pycadf/api_audit_map.conf',
-                                           service_name='pycadf')
+        middleware = audit.AuditMiddleware(
+            FakeApp(),
+            audit_map_file='etc/pycadf/nova_api_audit_map.conf',
+            service_name='pycadf')
         req = webob.Request.blank('/foo/bar',
                                   environ={'REQUEST_METHOD': 'GET'})
         middleware.process_response(req, webob.response.Response())

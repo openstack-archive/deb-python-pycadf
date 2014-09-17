@@ -1,19 +1,16 @@
-# -*- encoding: utf-8 -*-
-#
 # Copyright 2013 IBM Corp.
 #
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
 #
-# Licensed under the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License. You may obtain
-# a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations
-# under the License.
+# License for the specific language governing permissions and limitations under
+# the License.
 
 import ast
 import collections
@@ -37,7 +34,7 @@ from pycadf import resource
 from pycadf import tag
 from pycadf import timestamp
 
-#NOTE(gordc): remove cfg once we move over to this middleware version
+# NOTE(gordc): remove cfg once we move over to this middleware version
 CONF = cfg.CONF
 opts = [cfg.StrOpt('api_audit_map',
                    default='api_audit_map.conf',
@@ -115,7 +112,7 @@ class OpenStackAuditApi(object):
 
     Service = collections.namedtuple('Service',
                                      ['id', 'name', 'type', 'admin_endp',
-                                     'public_endp', 'private_endp'])
+                                      'public_endp', 'private_endp'])
 
     def __init__(self, map_file=None):
         if map_file is None:
@@ -123,6 +120,10 @@ class OpenStackAuditApi(object):
             if not os.path.exists(CONF.audit.api_audit_map):
                 map_file = cfg.CONF.find_file(CONF.audit.api_audit_map)
         self._MAP = _configure_audit_map(map_file)
+
+    @staticmethod
+    def _clean_path(value):
+        return value[:-5] if value.endswith('.json') else value
 
     def _get_action(self, req):
         """Take a given Request, parse url path to calculate action type.
@@ -140,7 +141,7 @@ class OpenStackAuditApi(object):
 
         """
         path = req.path[:-1] if req.path.endswith('/') else req.path
-        url_ending = path[path.rfind('/') + 1:]
+        url_ending = self._clean_path(path[path.rfind('/') + 1:])
         method = req.method
 
         if url_ending + '/' + method.lower() in self._MAP.custom_actions:
@@ -167,7 +168,7 @@ class OpenStackAuditApi(object):
                 action = taxonomy.ACTION_LIST
             else:
                 action = taxonomy.ACTION_READ
-        elif method == 'PUT':
+        elif method == 'PUT' or method == 'PATCH':
             action = taxonomy.ACTION_UPDATE
         elif method == 'DELETE':
             action = taxonomy.ACTION_DELETE
@@ -201,6 +202,7 @@ class OpenStackAuditApi(object):
         type_uri = ''
         prev_key = None
         for key in re.split('/', req.path):
+            key = self._clean_path(key)
             if key in self._MAP.path_kw:
                 type_uri += '/' + key
             elif prev_key in self._MAP.path_kw:
