@@ -3,6 +3,8 @@ python-pycadf (0.6.0-1) experimental; urgency=medium
   * New upstream release.
   * Uploading to experimental just right before the freeze.
   * Updated (build-)depends for this release.
+  * Install the *_api_audit_map.conf correctly (previously, there was only a
+    single file, now there's 4...).
 
  -- Thomas Goirand <zigo@debian.org>  Wed, 17 Sep 2014 15:43:39 +0800
 
