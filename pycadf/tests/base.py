@@ -17,10 +17,9 @@
 import os.path
 
 import fixtures
-from oslo.config import cfg
+from oslo_config import cfg
+from oslotest import moxstubout
 import testtools
-
-from pycadf.openstack.common.fixture import moxstubout
 
 
 class TestCase(testtools.TestCase):

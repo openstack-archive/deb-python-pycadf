@@ -14,9 +14,8 @@
 
 import abc
 
+from oslo_serialization import jsonutils
 import six
-
-from pycadf.openstack.common import jsonutils
 
 CADF_SCHEMA_1_0_0 = 'cadf:'
 CADF_VERSION_1_0_0 = 'http://schemas.dmtf.org/cloud/audit/1.0/'
@@ -71,7 +70,8 @@ class ValidatorDescriptor(object):
             raise ValueError('%s must not be None.' % self.name)
 
 
-class CADFAbstractType(six.with_metaclass(abc.ABCMeta, object)):
+@six.add_metaclass(abc.ABCMeta)
+class CADFAbstractType(object):
     """The abstract base class for all CADF (complex) data types (classes)."""
 
     @abc.abstractmethod

@@ -18,14 +18,14 @@ import os.path
 import sys
 import traceback as tb
 
-from oslo.config import cfg
-import oslo.messaging
+from oslo_config import cfg
+from oslo_context import context
+import oslo_messaging
 import six
 import webob.dec
 
+from pycadf._i18n import _
 from pycadf.middleware import base
-from pycadf.openstack.common import context
-from pycadf.openstack.common.gettextutils import _  # noqa
 
 LOG = None
 
@@ -76,8 +76,8 @@ class RequestNotifier(base.Middleware):
         self.service_name = conf.get('service_name')
         self.ignore_req_list = [x.upper().strip() for x in
                                 conf.get('ignore_req_list', '').split(',')]
-        self.notifier = oslo.messaging.Notifier(
-            oslo.messaging.get_transport(cfg.CONF, aliases=TRANSPORT_ALIASES),
+        self.notifier = oslo_messaging.Notifier(
+            oslo_messaging.get_transport(cfg.CONF, aliases=TRANSPORT_ALIASES),
             os.path.basename(sys.argv[0]))
         super(RequestNotifier, self).__init__(app)
 
