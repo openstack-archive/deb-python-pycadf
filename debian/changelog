@@ -1,6 +1,7 @@
-python-pycadf (0.8.0-2) UNRELEASED; urgency=medium
+python-pycadf (0.8.0-1) unstable; urgency=medium
 
   * New upstream release.
+  * Uploading to unstable.
   * Fixed (build-)depends for this release.
 
  -- Thomas Goirand <zigo@debian.org>  Mon, 16 Mar 2015 14:44:59 +0100
