@@ -1,10 +1,11 @@
-python-pycadf (1.1.0-1) UNRELEASED; urgency=medium
+python-pycadf (1.1.0-1) experimental; urgency=medium
 
+  * Team upload.
   * New upstream release.
   * Align (Build-)Depends with upstream.
   * Refresh patches.
 
- -- James Page <james.page@ubuntu.com>  Thu, 17 Sep 2015 10:47:54 +0100
+ -- James Page <james.page@ubuntu.com>  Thu, 17 Sep 2015 11:05:54 +0100
 
 python-pycadf (0.8.0-1) unstable; urgency=medium
 
