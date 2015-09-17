@@ -2,12 +2,12 @@ Source: python-pycadf
 Section: python
 Priority: optional
 Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
-Uploaders: Thomas Goirand <zigo@debian.org>
+Uploaders: Thomas Goirand <zigo@debian.org>,
 Build-Depends: debhelper (>= 9~),
                dh-python,
                openstack-pkg-tools (>= 23~),
                python-all,
-               python-pbr,
+               python-pbr (>= 1.3),
                python-setuptools,
                python-sphinx,
 Build-Depends-Indep: python-coverage (>= 3.6),
@@ -32,10 +32,11 @@ Package: python-pycadf
 Architecture: all
 Depends: python-oslo.config (>= 1:2.1.0),
          python-oslo.serialization (>= 1.4.0),
+         python-pbr (>= 1.3),
          python-six (>= 1.9.0),
          ${misc:Depends},
-         ${python:Depends}
-Recommends: ${python:Recommends}
+         ${python:Depends},
+Recommends: ${python:Recommends},
 Description: implementation of DMTF Cloud Audit (CADF) data model
  pyCADF is an implementation of DMTF Cloud Audit (CADF) data model.
  DMTF Cloud Management Initiative is promoting the work of the Cloud Management
