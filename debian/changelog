@@ -1,3 +1,10 @@
+python-pycadf (1.1.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+  * Align (Build-)Depends with upstream.
+
+ -- James Page <james.page@ubuntu.com>  Thu, 17 Sep 2015 10:47:54 +0100
+
 python-pycadf (0.8.0-1) unstable; urgency=medium
 
   * New upstream release.
