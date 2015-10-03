@@ -1,6 +1,7 @@
 python-pycadf (1.1.0-2) experimental; urgency=medium
 
   * Added Python 3 support.
+  * Fixed watching to use github tag and not broken pypi.
 
  -- Thomas Goirand <zigo@debian.org>  Sat, 03 Oct 2015 17:33:25 +0200
 
