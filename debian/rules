@@ -20,7 +20,7 @@ override_dh_auto_install:
 		python$$pyvers setup.py install --install-layout=deb \
 			--root $(CURDIR)/debian/python3-pycadf; \
 	done
-	rm -rf $(CURDIR)/debian/python-pycadf/usr/etc
+	rm -rf $(CURDIR)/debian/python*-pycadf/usr/etc
 	for i in ceilometer_api_audit_map.conf cinder_api_audit_map.conf glance_api_audit_map.conf neutron_api_audit_map.conf nova_api_audit_map.conf trove_api_audit_map.conf ; do \
 		install -D -m 0664 etc/pycadf/$$i $(CURDIR)/debian/pycadf-common/etc/pycadf/$$i ; \
 	done
