@@ -10,6 +10,9 @@ Build-Depends: debhelper (>= 9~),
                python-pbr (>= 1.3),
                python-setuptools,
                python-sphinx,
+               python3-all,
+               python3-pbr (>= 1.3),
+               python3-setuptools,
 Build-Depends-Indep: python-coverage (>= 3.6),
                      python-fixtures (>= 1.3.1),
                      python-hacking (>= 0.10.0),
@@ -21,6 +24,14 @@ Build-Depends-Indep: python-coverage (>= 3.6),
                      python-subunit (>= 0.0.18),
                      python-testtools (>= 1.4.0),
                      python-tz,
+                     python3-fixtures (>= 1.3.1),
+                     python3-oslo.config (>= 1:2.1.0),
+                     python3-oslo.serialization (>= 1.4.0),
+                     python3-oslotest (>= 1:1.10.0),
+                     python3-six (>= 1.9.0),
+                     python3-subunit (>= 0.0.18),
+                     python3-testtools (>= 1.4.0),
+                     python3-tz,
                      subunit (>= 0.0.18),
                      testrepository (>= 0.0.18),
 Standards-Version: 3.9.6
@@ -30,16 +41,48 @@ Homepage: https://github.com/openstack/pycadf
 
 Package: python-pycadf
 Architecture: all
-Depends: python-oslo.config (>= 1:2.1.0),
+Depends: pycadf-common (= ${binary:Version}),
+         python-oslo.config (>= 1:2.1.0),
          python-oslo.serialization (>= 1.4.0),
          python-pbr (>= 1.3),
          python-six (>= 1.9.0),
          ${misc:Depends},
          ${python:Depends},
-Recommends: ${python:Recommends},
-Description: implementation of DMTF Cloud Audit (CADF) data model
+Description: implementation of DMTF Cloud Audit (CADF) data model - Python 2.7
  pyCADF is an implementation of DMTF Cloud Audit (CADF) data model.
  DMTF Cloud Management Initiative is promoting the work of the Cloud Management
  Work Group, the Cloud Auditing Data Federation Working Group, the System
  Virtualization, Partitioning, Clustering Working Group and the Software
  Entitlement Working Group. See http://dmtf.org for details.
+ .
+ This package contains the Python 2.7 module.
+
+Package: python3-pycadf
+Architecture: all
+Depends: pycadf-common (= ${binary:Version}),
+         python3-oslo.config (>= 1:2.1.0),
+         python3-oslo.serialization (>= 1.4.0),
+         python3-pbr (>= 1.3),
+         python3-six (>= 1.9.0),
+         ${misc:Depends},
+         ${python3:Depends},
+Description: implementation of DMTF Cloud Audit (CADF) data model - 3.x
+ pyCADF is an implementation of DMTF Cloud Audit (CADF) data model.
+ DMTF Cloud Management Initiative is promoting the work of the Cloud Management
+ Work Group, the Cloud Auditing Data Federation Working Group, the System
+ Virtualization, Partitioning, Clustering Working Group and the Software
+ Entitlement Working Group. See http://dmtf.org for details.
+ .
+ This package contains the Python 3.x module.
+
+Package: pycadf-common
+Architecture: all
+Depends: ${misc:Depends},
+Description: implementation of DMTF Cloud Audit (CADF) data model - common files
+ pyCADF is an implementation of DMTF Cloud Audit (CADF) data model.
+ DMTF Cloud Management Initiative is promoting the work of the Cloud Management
+ Work Group, the Cloud Auditing Data Federation Working Group, the System
+ Virtualization, Partitioning, Clustering Working Group and the Software
+ Entitlement Working Group. See http://dmtf.org for details.
+ .
+ This package contains the common files for both Python 2.7 and 3.x modules.
