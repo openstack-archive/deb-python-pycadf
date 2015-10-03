@@ -77,6 +77,8 @@ Description: implementation of DMTF Cloud Audit (CADF) data model - 3.x
 
 Package: pycadf-common
 Architecture: all
+Breaks: python-pycadf (<= 1.1.0-1),
+Replaces: python-pycadf (<= 1.1.0-1),
 Depends: ${misc:Depends},
 Description: implementation of DMTF Cloud Audit (CADF) data model - common files
  pyCADF is an implementation of DMTF Cloud Audit (CADF) data model.
