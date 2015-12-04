@@ -1,6 +1,7 @@
 python-pycadf (2.0.1-1) experimental; urgency=medium
 
   * New upstream release.
+  * Fixed (build-)depends for this release.
 
  -- Thomas Goirand <zigo@debian.org>  Fri, 04 Dec 2015 11:43:14 +0100
 
