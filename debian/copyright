@@ -3,10 +3,6 @@ Upstream-Name: pycadf
 Upstream-Contact: OpenStack Project Creator <openstack-infra@lists.openstack.org>
 Source: git://github.com/openstack/pycadf.git
 
-Files: debian/*
-Copyright: (c) 2013, Thomas Goirand <zigo@debian.org>
-License: Apache-2
-
 Files: *
 Copyright: (c) 2013, OpenStack foundation
            (c) 2013, IBM corp.
@@ -17,6 +13,10 @@ Copyright: (c) 2013, OpenStack foundation
            (c) 2013, Gordon Chung <chungg@ca.ibm.com>
            (c) 2013, Matt Riedemann <mriedem@us.ibm.com>
            (c) 2013, Doug Hellmann <doug.hellmann@dreamhost.com>
+License: Apache-2
+
+Files: debian/*
+Copyright: (c) 2013-2016, Thomas Goirand <zigo@debian.org>
 License: Apache-2
 
 License: Apache-2
