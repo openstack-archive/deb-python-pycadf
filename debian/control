@@ -36,7 +36,7 @@ Build-Depends-Indep: python-coverage (>= 3.6),
                      python3-tz,
                      subunit (>= 0.0.18),
                      testrepository (>= 0.0.18),
-Standards-Version: 3.9.6
+Standards-Version: 3.9.7
 Vcs-Browser: https://anonscm.debian.org/cgit/openstack/python-pycadf.git/
 Vcs-Git: https://anonscm.debian.org/git/openstack/python-pycadf.git
 Homepage: https://github.com/openstack/pycadf
