@@ -1,1 +1,2 @@
 fix-pytz-version-in-requirements.txt.patch
+fix-trashed-binary-symbols-in-neutron_api_audit_map.conf.patch
