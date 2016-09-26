@@ -37,8 +37,8 @@ Build-Depends-Indep: python-coverage (>= 3.6),
                      subunit (>= 0.0.18),
                      testrepository (>= 0.0.18),
 Standards-Version: 3.9.8
-Vcs-Browser: https://anonscm.debian.org/cgit/openstack/python-pycadf.git/
-Vcs-Git: https://anonscm.debian.org/git/openstack/python-pycadf.git
+Vcs-Browser: https://git.openstack.org/cgit/openstack/deb-python-pycadf?h=debian%2Fnewton
+Vcs-Git: https://git.openstack.org/openstack/deb-python-pycadf -b debian/newton
 Homepage: https://github.com/openstack/pycadf
 
 Package: python-pycadf
