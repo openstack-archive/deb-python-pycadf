@@ -3,11 +3,13 @@ Author: Thomas Goirand <zigo@debian.org>
 Forwarded: no
 Last-Update: 2015-12-04
 
---- python-pycadf-2.0.1.orig/requirements.txt
-+++ python-pycadf-2.0.1/requirements.txt
+Index: deb-python-pycadf/requirements.txt
+===================================================================
+--- deb-python-pycadf.orig/requirements.txt
++++ deb-python-pycadf/requirements.txt
 @@ -3,6 +3,6 @@
  # process, which may cause wedges in the gate later.
- oslo.config>=3.7.0 # Apache-2.0
+ oslo.config>=3.14.0 # Apache-2.0
  oslo.serialization>=1.10.0 # Apache-2.0
 -pytz>=2013.6 # MIT
 +pytz
