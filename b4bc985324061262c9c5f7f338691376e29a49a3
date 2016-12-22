@@ -1,0 +1,9 @@
+Code-Review+2: Steve Martinelli <s.martinelli@gmail.com>
+Code-Review+2: Doug Hellmann <doug@doughellmann.com>
+Workflow+1: Doug Hellmann <doug@doughellmann.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 21 Dec 2016 15:49:18 +0000
+Reviewed-on: https://review.openstack.org/410036
+Project: openstack/deb-python-pycadf
+Branch: refs/heads/master
