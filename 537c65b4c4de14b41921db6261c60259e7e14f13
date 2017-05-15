@@ -1,0 +1,8 @@
+Code-Review+2: gordon chung <gord@live.ca>
+Workflow+1: gordon chung <gord@live.ca>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 15 May 2017 14:10:35 +0000
+Reviewed-on: https://review.openstack.org/464459
+Project: openstack/deb-python-pycadf
+Branch: refs/heads/master
